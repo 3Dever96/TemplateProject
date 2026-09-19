@@ -4,9 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(SphereCollider))]
 public class InteractionHub : MonoBehaviour
 {
-    private List<InteractionObject> interactions = new List<InteractionObject>();
-    private InteractionObject currentObject;
-    private InteractionObject lastObject;
+    public List<InteractionObject> interactions = new List<InteractionObject>();
+    public InteractionObject currentObject;
+    public InteractionObject lastObject;
 
     private InputHub input;
     private bool canInteract;

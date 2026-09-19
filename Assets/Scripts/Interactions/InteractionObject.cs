@@ -17,7 +17,7 @@ public class InteractionObject : InteractionBase
         }
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (isCurrent)
         {
@@ -44,7 +44,7 @@ public class InteractionObject : InteractionBase
         isCurrent = value;
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if (canInteract)
         {
@@ -57,7 +57,7 @@ public class InteractionObject : InteractionBase
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected void OnTriggerExit(Collider other)
     {
         InteractionHub hub = other.GetComponent<InteractionHub>();
 
