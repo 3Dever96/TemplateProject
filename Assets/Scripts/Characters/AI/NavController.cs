@@ -10,4 +10,9 @@ public class NavController : MonoBehaviour
     {
         Agent = GetComponent<NavMeshAgent>();
     }
+
+    public void SetAgent()
+    {
+        Agent = GetComponent<NavMeshAgent>();
+    }
 }

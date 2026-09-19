@@ -8,6 +8,8 @@ public class EnemyNavController : NavController
 
     public Transform Player { get; private set; }
 
+    public EnemySpawnPoint mySpawner;
+
     protected override void Start()
     {
         base.Start();
