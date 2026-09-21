@@ -18,7 +18,7 @@ public class InteractionTrigger : InteractionBase
         print("Player position is " + transform.position);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (interactType == InteractType.Enter)
         {
@@ -26,7 +26,7 @@ public class InteractionTrigger : InteractionBase
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    protected virtual void OnTriggerStay(Collider other)
     {
         if (interactType == InteractType.Stay)
         {
@@ -34,7 +34,7 @@ public class InteractionTrigger : InteractionBase
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
         if (interactType == InteractType.Exit)
         {

@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public PlayerState LastState { get; private set; }
     [field: SerializeField] public PlayerGroundState GroundState { get; private set; } = new PlayerGroundState();
     [field: SerializeField] public PlayerAirState AirState { get; private set; } = new PlayerAirState();
+    [field: SerializeField] public PlayerAttackState AttackState { get; private set; } = new PlayerAttackState();
 
     private void Start()
     {
