@@ -24,8 +24,11 @@ public class Hitbox : InteractionTrigger
 
     public override void OnInteract()
     {
-        opponent.TakeDamage(atk);
-        opponent = null;
+        if (opponent != null)
+        {
+            opponent.TakeDamage(atk);
+            opponent = null;
+        }
     }
 
     protected override void OnTriggerStay(Collider other)

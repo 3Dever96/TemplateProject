@@ -22,9 +22,9 @@ TagManager:
   - Interaction Object
   - Interaction Manager
   - Hazard
-  - 
-  - 
-  - 
+  - Player Projectile
+  - Enemy Projectile
+  - Damageable
   - 
   - 
   - 
