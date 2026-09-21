@@ -3,7 +3,7 @@ using UnityEngine;
 public class Hitbox : InteractionTrigger
 {
     public float atk;
-    private CharacterStats opponent;
+    public CharacterStats opponent;
     private CharacterStats myStats;
 
     private void Start()
