@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9201464187758997081}
   - component: {fileID: 5592576345854951092}
   - component: {fileID: 2874440217848908325}
+  - component: {fileID: 1720314086002644735}
   m_Layer: 9
   m_Name: Enemy Template
   m_TagString: Untagged
@@ -101,6 +102,26 @@ MonoBehaviour:
     chaseSpeed: 4
     chaseDistance: 5
   mySpawner: {fileID: 0}
+--- !u!114 &1720314086002644735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868419733919164538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59b296fda61023d498e184a1a63c29ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterStats
+  stats:
+  - key: HP
+    value:
+      baseValue: 50
+  - key: ATK
+    value:
+      baseValue: 2
+  currentHp: 0
 --- !u!1 &1311187936554593409
 GameObject:
   m_ObjectHideFlags: 0
