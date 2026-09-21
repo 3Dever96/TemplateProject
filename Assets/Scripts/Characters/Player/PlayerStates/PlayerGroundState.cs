@@ -12,11 +12,13 @@ public class PlayerGroundState : PlayerState
     private float moveSpeed;
 
     private bool canJump;
+    private bool canMelee;
 
     public override void StartState(PlayerController player)
     {
         player.VerticalSpeed = player.StickForce;
         canJump = false;
+        canMelee = false;
     }
 
     public override void UpdateState(PlayerController player)
@@ -81,6 +83,13 @@ public class PlayerGroundState : PlayerState
         {
             player.SetState(player.AirState);
         }
+
+        if (player.Input.Melee && canMelee)
+        {
+            player.SetState(player.AttackState);
+        }
+
+        canMelee = !player.Input.Melee;
     }
 
     public override void ExitState(PlayerController player)

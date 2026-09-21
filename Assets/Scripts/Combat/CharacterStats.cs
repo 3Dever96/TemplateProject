@@ -78,14 +78,20 @@ public class CharacterStats : MonoBehaviour
 
             if (blink >= blinkTime)
             {
-                avatar.SetActive(!avatar.gameObject.activeInHierarchy);
+                if (avatar != null)
+                {
+                    avatar.SetActive(!avatar.gameObject.activeInHierarchy);
+                }
                 blink = 0f;
             }
 
             yield return null;
         }
 
-        avatar.SetActive(true);
+        if (avatar != null)
+        {
+            avatar.SetActive(true);
+        }
         isInvincible = false;
     }
 }

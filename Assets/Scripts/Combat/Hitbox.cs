@@ -4,6 +4,23 @@ public class Hitbox : InteractionTrigger
 {
     public float atk;
     private CharacterStats opponent;
+    private CharacterStats myStats;
+
+    private void Start()
+    {
+        myStats = GetComponentInParent<CharacterStats>();
+    }
+
+    private void Update()
+    {
+        if (myStats != null)
+        {
+            if (atk != myStats.stats["ATK"].Value)
+            {
+                atk = myStats.stats["ATK"].Value;
+            }
+        }
+    }
 
     public override void OnInteract()
     {
