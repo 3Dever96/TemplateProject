@@ -44,7 +44,7 @@ public class InteractionObject : InteractionBase
         isCurrent = value;
     }
 
-    protected void OnTriggerEnter(Collider other)
+    protected void OnTriggerStay(Collider other)
     {
         if (canInteract)
         {

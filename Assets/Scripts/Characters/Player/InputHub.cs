@@ -56,7 +56,9 @@ public class InputHub : MonoBehaviour
             case "LockOn": LockOn = context.ReadValue<float>() > 0.5f; break;
             case "Interact": Interact = context.ReadValue<float>() > 0.5f; break;
             case "Crouch": Crouch = context.ReadValue<float>() > 0.5f; break;
-            case "Pause": Pause = context.ReadValue<float>() > 0.5f; break;
+            case "Pause":
+                GameManager.instance.OnPauseGame();
+                break;
             case "Map": Map = context.ReadValue<float>() > 0.5f; break;
         }
     }

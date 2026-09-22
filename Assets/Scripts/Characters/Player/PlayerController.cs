@@ -39,11 +39,14 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (CurrentState != null)
+        if (GameManager.instance.state == GameState.Play)
         {
-            CurrentState.UpdateState(this);
-            CurrentState.ChangeState(this);
-            Controller.Move(Velocity * Time.deltaTime);
+            if (CurrentState != null)
+            {
+                CurrentState.UpdateState(this);
+                CurrentState.ChangeState(this);
+                Controller.Move(Velocity * Time.deltaTime);
+            }
         }
     }
 
