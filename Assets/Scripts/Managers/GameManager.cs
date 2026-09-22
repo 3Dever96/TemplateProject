@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public GameState state;
+
     public UnityEvent OnPause;
 
     private void Awake()
@@ -25,5 +27,6 @@ public class GameManager : MonoBehaviour
 public enum GameState
 {
     Play,
-    Pause
+    Pause,
+    Dialogue
 }

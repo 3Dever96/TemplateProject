@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bded852357987564eaa20ebfd18d574f, type: 3}
+  m_Name: TestConversation
+  m_EditorClassIdentifier: Assembly-CSharp::Conversation
+  dialogue:
+  - key: A. Intro
+    value:
+      dialogue: This is a test of the conversation system.
+      responses: []
+      nextKey: B. Explanation
+  - key: B. Explanation
+    value:
+      dialogue: This system will even branch between multple dialogue nodes.
+      responses: []
+      nextKey: C. Question
+  - key: C. Question
+    value:
+      dialogue: Do You understand?
+      responses:
+      - option: Yes
+        key: E. Conclusion
+      - option: No
+        key: D. Shock
+      nextKey: 
+  - key: D. Shock
+    value:
+      dialogue: What?!  How can you not understand.
+      responses: []
+      nextKey: B. Explanation
+  - key: E. Conclusion
+    value:
+      dialogue: Good.  Let's talk again later.
+      responses: []
+      nextKey: 
