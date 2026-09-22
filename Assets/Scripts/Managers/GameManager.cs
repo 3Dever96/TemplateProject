@@ -7,7 +7,9 @@ public class GameManager : MonoBehaviour
 
     public GameState state;
 
+    public UnityEvent OnResume;
     public UnityEvent OnPause;
+    public UnityEvent OnDialogue;
 
     private void Awake()
     {
@@ -21,6 +23,19 @@ public class GameManager : MonoBehaviour
     {
         OnPause?.Invoke();
         Time.timeScale = 0f;
+    }
+
+    public void ResumeGame()
+    {
+        state = GameState.Play;
+        Time.timeScale = 1f;
+        OnResume?.Invoke();
+    }
+
+    public void OnDialogueStart()
+    {
+        state = GameState.Dialogue;
+        OnDialogue?.Invoke();
     }
 }
 

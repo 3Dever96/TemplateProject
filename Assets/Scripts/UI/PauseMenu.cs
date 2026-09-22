@@ -14,7 +14,7 @@ public class PauseMenu : MonoBehaviour
 
     public void OnResume()
     {
-        manager.ChangeScreen("Player HUD");
+        GameManager.instance.ResumeGame();
     }
 
     public void OnOptions()

@@ -1,12 +1,17 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    public static DialogueManager instance;
+
     private RectTransform myTransform;
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float typeTime;
 
     [Header("UI Elements")]
     [SerializeField] private TMPro.TMP_Text speakerName;
@@ -16,8 +21,16 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject nextButton;
     [SerializeField] private GameObject dialogueOptionsButton;
 
-    [SerializeField] private Conversation conversation;
+    private Conversation conversation;
     private DialogueNode currentNode;
+    private bool shouldType = true;
+    private bool canType = false;
+
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+        if (instance != this) Destroy(gameObject);
+    }
 
     private void Start()
     {
@@ -42,6 +55,11 @@ public class DialogueManager : MonoBehaviour
         conversation = newConversation;
         if (conversation != null)
         {
+            shouldType = true;
+            canType = false;
+
+            dialogue.maxVisibleCharacters = 0;
+
             SetDialogue(conversation.dialogue["A. Intro"]);
         }
     }
@@ -75,7 +93,15 @@ public class DialogueManager : MonoBehaviour
         }
 
         dialogue.text = currentNode.dialogue;
-        dialogue.maxVisibleCharacters = 0;
+
+        if (canType)
+        {
+            StartCoroutine(TypeText());
+        }
+        else
+        {
+            dialogue.maxVisibleCharacters = 0;
+        }
     }
 
     public void OnNext()
@@ -98,6 +124,8 @@ public class DialogueManager : MonoBehaviour
         else
         {
             dialogue.maxVisibleCharacters = dialogue.text.Length;
+            StopCoroutine(TypeText());
+
             if (currentNode.responses.Count > 0)
             {
                 nextButton.SetActive(false);
@@ -108,8 +136,6 @@ public class DialogueManager : MonoBehaviour
 
     public void OnOption(int response)
     {
-        print(response);
-
         if (optionsBox.childCount > 0)
         {
             for (var i = optionsBox.childCount - 1; i >= 0; i--)
@@ -127,13 +153,20 @@ public class DialogueManager : MonoBehaviour
         {
             if (myTransform.localPosition != Vector3.zero)
             {
-                if (Vector3.Distance(myTransform.localPosition, Vector3.zero) > 0.5f)
+                if (Vector3.Distance(myTransform.localPosition, Vector3.zero) > 1f)
                 {
                     myTransform.localPosition = Vector3.Lerp(myTransform.localPosition, Vector3.zero, moveSpeed * Time.deltaTime);
                 }
                 else
                 {
                     myTransform.localPosition = Vector3.zero;
+                }
+            }
+            else
+            {
+                if (shouldType)
+                {
+                    StartCoroutine(TypeText());
                 }
             }
         }
@@ -143,15 +176,39 @@ public class DialogueManager : MonoBehaviour
 
             if (myTransform.localPosition != offscreen)
             {
-                if (Vector3.Distance(myTransform.localPosition, offscreen) > 0.5f)
+                if (Vector3.Distance(myTransform.localPosition, offscreen) > 1f)
                 {
                     myTransform.localPosition = Vector3.Lerp(myTransform.localPosition, offscreen, moveSpeed * Time.deltaTime);
                 }
                 else
                 {
+                    dialogue.text = "";
                     myTransform.localPosition = offscreen;
+                    shouldType = true;
+                    canType = false;
+                    GameManager.instance.ResumeGame();
                 }
             }
         }
+    }
+
+    private IEnumerator TypeText()
+    {
+        dialogue.maxVisibleCharacters = 0;
+
+        while (dialogue.maxVisibleCharacters < dialogue.text.Length)
+        {
+            dialogue.maxVisibleCharacters++;
+            yield return new WaitForSecondsRealtime(typeTime);
+        }
+
+        if (currentNode.responses.Count > 0)
+        {
+            nextButton.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(optionsBox.GetChild(0).gameObject);
+        }
+
+        shouldType = false;
+        canType = true;
     }
 }
