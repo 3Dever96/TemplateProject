@@ -26,11 +26,21 @@ public class PlayerHealthbar : MonoBehaviour
             player.OnHit.AddListener(UpdateHealthbar);
             player.OnDeath.AddListener(UpdateHealthbar);
         }
+        else
+        {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterStats>();
+
+            player.OnHit.AddListener(UpdateHealthbar);
+            player.OnDeath.AddListener(UpdateHealthbar);
+        }
     }
 
     private void OnDisable()
     {
-        player.OnHit.RemoveListener(UpdateHealthbar);
-        player.OnDeath.RemoveListener(UpdateHealthbar);
+        if (player != null)
+        {
+            player.OnHit.RemoveListener(UpdateHealthbar);
+            player.OnDeath.RemoveListener(UpdateHealthbar);
+        }
     }
 }
